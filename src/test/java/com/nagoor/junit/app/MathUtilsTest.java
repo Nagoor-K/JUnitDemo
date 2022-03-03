@@ -8,6 +8,16 @@ class MathUtilsTest {
 
   @Test
   void test() {
-    System.out.println("The test cases executed successfully");
+    MathUtils mathUtils=new MathUtils();
+    int expected=2;
+    int actual=mathUtils.addNums(1, 1);
+    assertEquals(expected, actual);
   }
+  
+  @Test
+  void testDivide() {
+    MathUtils mathUtils=new MathUtils();
+    assertThrows(ArithmeticException.class, () -> mathUtils.divNums(1, 0),"Divded by zero");
+  }
+  
 }
