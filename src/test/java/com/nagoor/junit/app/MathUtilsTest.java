@@ -11,11 +11,15 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestReporter;
 
 @TestInstance(TestInstance.Lifecycle.PER_METHOD)
 class MathUtilsTest {
     MathUtils mathUtils;
+    TestInfo info;
+    TestReporter reporter;
     
     @BeforeAll
     static void testBeforeAll() {
@@ -30,8 +34,10 @@ class MathUtilsTest {
     }
     
     @BeforeEach
-	void init() {
+	void init(TestInfo info, TestReporter reporter) {
 		mathUtils=new MathUtils();
+		this.info=info;
+		this.reporter=reporter;
 	}
     
     @AfterEach
@@ -42,6 +48,7 @@ class MathUtilsTest {
     @Test
 	@DisplayName("Asserton Methods")
     void testAssertionAll() {
+    	reporter.publishEntry("Running "+info.getTestMethod()+" with tags"+info.getTags());
     	assertAll(
     				() -> assertEquals(4, mathUtils.mulNums(-2, -2)),
     				() -> assertNotEquals(-4, mathUtils.addNums(-1, -2)),
