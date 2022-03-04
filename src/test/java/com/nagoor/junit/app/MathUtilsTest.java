@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -36,12 +37,34 @@ class MathUtilsTest {
     	System.out.print("This will run after each method");
     }
     
-  @Test
+    @Test
+	@DisplayName("Asserton Methods")
+    void testAssertionAll() {
+    	assertAll(
+    				() -> assertEquals(4, mathUtils.mulNums(-2, -2)),
+    				() -> assertNotEquals(-4, mathUtils.addNums(-1, -2)),
+    				() -> assertEquals(16, mathUtils.divNums(32, 2))
+    			
+    			);
+    }
+    
+  @Nested
   @DisplayName("Testing Add Method")
-  void testAdd() {
-    int expected=2;
-    int actual=mathUtils.addNums(1, 1);
-    assertEquals(expected, actual);
+  class testAdd {
+	@Test
+	@DisplayName("Addng two positive numbers")
+    void testPosi(){
+    	int expected=2;
+        int actual=mathUtils.addNums(1, 1);
+        assertEquals(expected, actual);
+    }
+	 @Test
+	 @DisplayName("Addng two negative numbers")
+    void testNegi(){
+    	int expected=2;
+        int actual=mathUtils.addNums(1, 1);
+        assertEquals(expected, actual);
+    }
   }
   
   @Test
