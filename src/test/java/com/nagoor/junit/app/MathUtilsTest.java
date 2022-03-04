@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -50,6 +52,7 @@ class MathUtilsTest {
     
   @Nested
   @DisplayName("Testing Add Method")
+  @Tag("Math")
   class testAdd {
 	@Test
 	@DisplayName("Addng two positive numbers")
@@ -69,11 +72,13 @@ class MathUtilsTest {
   
   @Test
   @DisplayName("Testing Divide Method")
+  @Tag("Math")
   void testDivide() {
     assertThrows(ArithmeticException.class, () -> mathUtils.divNums(1, 0),"Divded by zero");
   }
-  @Test
+  @RepeatedTest(3)
   @DisplayName("Testing Name Method")
+  @Tag("Name")
   void testName() {
     String expected="PatanNagoorKhan";
     assertNotEquals(expected, mathUtils.name("Patan"), "The test case failed ");
